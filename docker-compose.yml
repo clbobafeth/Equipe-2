@@ -1,0 +1,21 @@
+services:
+  ntp:
+    build: ./ntp
+    container_name: ntp_server
+    networks:
+      lab_net:
+        ipv4_address: 172.28.0.4
+    ports:
+      - "20123:123/udp"
+    cap_add:
+      - SYS_TIME
+    restart: unless-stopped
+
+networks:
+  lab_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
+
+
