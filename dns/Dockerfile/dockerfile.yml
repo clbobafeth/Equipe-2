@@ -1,0 +1,10 @@
+FROM debian:trixie-slim
+
+RUN apt-get update && \
+    apt-get install -y bind9
+
+# Copie de la configuration BIND9
+COPY config/ /etc/bind/
+
+# Lancement en foreground
+CMD ["named", "-g"]

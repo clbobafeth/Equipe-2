@@ -1,4 +1,4 @@
-services:
+﻿services:
   ntp:
     build: ./ntp
     container_name: ntp_server
@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
 
   vpn:
-    build: ./vpn
+    build: ./vpn/Dockerfile
     container_name: vpn_server
     networks:
       lab_net:
@@ -26,6 +26,22 @@ services:
     volumes:
       - ./vpn:/etc/openvpn
     restart: unless-stopped
+
+  radius:
+    build: ./radius
+    container_name: freeradius
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_USER: radius
+      DB_PASS: radiuspass
+      DB_NAME: radiusdb
+    ports:
+      - "1812:1812/udp"
+      - "1813:1813/udp"
+    networks:
+      - pop-net
 
 networks:
   lab_net:
