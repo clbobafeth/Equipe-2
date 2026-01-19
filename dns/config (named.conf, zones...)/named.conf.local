@@ -1,0 +1,13 @@
+// Déclaration de la zone directe "sae34.lan"
+zone "sae34.lan" {
+    type master;
+    file "/etc/bind/db.sae34.lan"; // Chemin vers le fichier de zone
+    allow-transfer { none; }; // Désactive les transferts de zone (à adapter si nécessaire)
+};
+
+// Déclaration de la zone inverse "0.28.172.in-addr.arpa"
+zone "0.28.172.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.172.28.0"; // Chemin vers le fichier de zone inverse
+    allow-transfer { none; }; // Désactive les transferts de zone (à adapter si nécessaire)
+};

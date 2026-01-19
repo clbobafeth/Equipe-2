@@ -1,0 +1,14 @@
+$TTL    604800
+@       IN      SOA     dns.sae34.lan. admin.sae34.lan. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      dns.sae34.lan.
+5       IN      PTR     dns.sae34.lan.
+5       IN      PTR     sae34.lan.
+4       IN      PTR     ntp.sae34.lan.
+3       IN      PTR     radius.sae34.lan.
+2       IN      PTR     vpn.sae34.lan.
