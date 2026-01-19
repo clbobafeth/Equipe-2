@@ -1,13 +1,14 @@
 ﻿services:
   dns:
     build: ./dns
-    container_name: dns-server
+    container_name: dns_server
     networks:
-      pop-net:
+      lab_net:
         ipv4_address: 172.28.0.5
     ports:
       - "53:53/udp"
       - "53:53/tcp"
+    restart: unless-stopped
   ntp:
     build: ./ntp
     container_name: ntp_server
@@ -36,21 +37,21 @@
       - ./vpn:/etc/openvpn
     restart: unless-stopped
 
-  radius:
-    build: ./radius
-    container_name: freeradius
-    depends_on:
-      - postgres
-    environment:
-      DB_HOST: postgres
-      DB_USER: radius
-      DB_PASS: radiuspass
-      DB_NAME: radiusdb
-    ports:
-      - "1812:1812/udp"
-      - "1813:1813/udp"
-    networks:
-      - pop-net
+#  radius:
+ #   build: ./radius
+  #  container_name: freeradius
+   # depends_on:
+    #  - postgres
+    #environment:
+     # DB_HOST: postgres
+      #DB_USER: radius
+     # DB_PASS: radiuspass
+     # DB_NAME: radiusdb
+    #ports:
+     # - "1812:1812/udp"
+      #- "1813:1813/udp"
+    #networks:
+     # - pop-net
 
 networks:
   lab_net:
