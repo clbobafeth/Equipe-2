@@ -1,4 +1,4 @@
-﻿services:
+services:
   ntp:
     build: ./ntp
     container_name: ntp_server
@@ -12,7 +12,7 @@
     restart: unless-stopped
 
   vpn:
-    build: ./vpn/Dockerfile
+    build: ./vpn
     container_name: vpn_server
     networks:
       lab_net:
