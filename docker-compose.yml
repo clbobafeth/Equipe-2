@@ -1,4 +1,4 @@
-services:
+﻿services:
   ntp:
     build: ./ntp
     container_name: ntp_server
@@ -11,11 +11,25 @@ services:
       - SYS_TIME
     restart: unless-stopped
 
+  vpn:
+    build: ./vpn/Dockerfile
+    container_name: vpn_server
+    networks:
+      lab_net:
+        ipv4_address: 172.28.0.2
+    ports:
+      - "1194:1194/udp"
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - ./vpn:/etc/openvpn
+    restart: unless-stopped
+
 networks:
   lab_net:
     driver: bridge
     ipam:
       config:
         - subnet: 172.28.0.0/24
-
-
