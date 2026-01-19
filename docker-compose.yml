@@ -1,4 +1,14 @@
 ﻿services:
+  dns:
+  build: ./dns
+  container_name: dns-server
+  networks:
+    pop-net:
+      ipv4_address: 172.28.0.5
+  ports:
+    - "53:53/udp"
+    - "53:53/tcp"
+
   ntp:
     build: ./ntp
     container_name: ntp_server
